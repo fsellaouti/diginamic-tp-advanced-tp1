@@ -1,12 +1,16 @@
-class Planet {
+module.exports = class Planet {
 
 	constructor({name, population}) {
 		this.name = name;
-		this.population = population;
+		if (population === "unknown") {
+			this.population = 0;
+		} else {
+			this.population = Number(population);
+		}
 	}
 
 	static countPlanetsPopulation(array){
-		const somme = (planet1, planet2) => planet1.population + planet2.population;
-		return array.reduce(somme);
+		const somme = (accum, planet) => accum + planet.population;
+		return array.reduce(somme, 0);
 	}
 }
